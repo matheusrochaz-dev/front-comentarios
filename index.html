@@ -2,7 +2,93 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comentários</title>
+    <style>
+        /* Estilos básicos */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: vertical;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        h2 {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+
+        pre {
+            white-space: pre-wrap;       /* Quebra de linha no texto */
+            word-wrap: break-word;       /* Garante que as palavras longas quebram a linha */
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        /* Estilos responsivos */
+        @media screen and (max-width: 600px) {
+            main {
+                padding: 15px;
+            }
+
+            textarea {
+                font-size: 14px;
+            }
+
+            button {
+                width: 100%;
+                font-size: 18px;
+            }
+        }
+    </style>
     <script>
         // Função para obter e exibir os comentários
         async function carregarComentarios() {
@@ -49,13 +135,18 @@
     </script>
 </head>
 <body>
-    <h1>Comentários</h1>
-    <form onsubmit="enviarComentario(event)">
-        <textarea id="comentario" rows="4" cols="50" placeholder="Escreva seu comentário aqui..." required></textarea><br>
-        <button type="submit">Enviar</button>
-    </form>
+    <header>
+        <h1>Comentários</h1>
+    </header>
 
-    <h2>Comentários salvos:</h2>
-    <pre id="comentarios"></pre>
+    <main>
+        <form onsubmit="enviarComentario(event)">
+            <textarea id="comentario" rows="4" cols="50" placeholder="Escreva seu comentário aqui..." required></textarea><br>
+            <button type="submit">Enviar</button>
+        </form>
+
+        <h2>Comentários salvos:</h2>
+        <pre id="comentarios"></pre>
+    </main>
 </body>
 </html>
