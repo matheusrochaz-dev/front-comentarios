@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Comentários</title>
+</head>
+<body>
+    <h1>Comentários</h1>
+
+    <form id="comentario-form">
+        <textarea id="comentario" rows="4" cols="50" placeholder="Escreva seu comentário aqui..." required></textarea><br>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <h2>Comentários salvos:</h2>
+    <pre id="comentarios">Carregando comentários...</pre>
+
+    <script>
+        const apiUrl = "https://backend-comentarios.onrender.com/comentarios";
+
+        // Função para carregar os comentários
+        async function carregarComentarios() {
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                const comentarios = data.comentarios || [];
+                document.getElementById("comentarios").textContent = comentarios.join("\n\n");
+            } catch (error) {
+                document.getElementById("comentarios").textContent = "Erro ao carregar comentários.";
+                console.error(error);
+            }
+        }
+
+        // Envia o comentário
+        document.getElementById("comentario-form").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            const comentario = document.getElementById("comentario").value.trim();
+            if (!comentario) return;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ comentario })
+                });
+
+                if (response.ok) {
+                    document.getElementById("comentario").value = "";
+                    carregarComentarios();
+                } else {
+                    alert("Erro ao enviar o comentário.");
+                }
+            } catch (error) {
+                alert("Erro ao conectar à API.");
+                console.error(error);
+            }
+        });
+
+        // Carrega os comentários ao iniciar a página
+        carregarComentarios();
+    </script>
+</body>
+</html>
